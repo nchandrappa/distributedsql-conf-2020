@@ -6,10 +6,18 @@ A sample app to get started with [react-static](https://github.com/nozzle/react-
 
 # Tutorial
 
+
+- Clone this repo:
+  ```bash
+  git clone https://github.com/nchandrappa/distributedsql-conf-2020
+  cd distributedsql-conf-2020/graphql-workshop/
+  ```
+
 - Deploy YugabyteDB on Kubernetes using helm 3:
 
 ```
 $ kubectl create namespace yb-demo
+
 $ helm install yb-demo-database yugabytedb/yugabyte \
 --set resource.master.requests.cpu=1,resource.master.requests.memory=1Gi,\
 resource.tserver.requests.cpu=2,resource.tserver.requests.memory=2Gi --namespace yb-demo
@@ -17,11 +25,11 @@ resource.tserver.requests.cpu=2,resource.tserver.requests.memory=2Gi --namespace
   Please checkout our [docs](https://docs.yugabyte.com/latest/deploy/kubernetes/) for other kubernetes deployment methods
 
 
-
 - Deploy Hasura on Kubernetes
 
 ```
 $ kubectl apply -f kubernetes/hasura-deployment.yaml
+
 $ kubectl apply -f kubernetes/hasura-svc.yaml
 
 ```
@@ -35,40 +43,55 @@ NAME                  EXTERNAL-IP       PORT(S)
 hasura                35.224.XX.XX      7001:31386/TCP
 ```
 
-
-- Get the Heroku app URL (say `my-app.herokuapp.com`)
 - Create `author` table:
   
-  Open Hasura console: visit https://<loadbalancer-ip>:7001/console on a browser  
+  Open Hasura console: visit https://loadbalancer-ip:7001/console on a browser  
   Navigate to `Data` section in the top nav bar and create a table as follows:
 
   ![Create author table](./assets/add_table.jpg)
 
-- Insert sample data into `author` table:
-
-  ![Insert data into author table](./assets/insert_data.jpg)
-
-  Verify if the row is inserted successfully
-
-  ![Insert data into author table](./assets/browse_rows.jpg)
-
 - Similarly, create an article table with the following data model:
 table: `article`
-columns: `id`, `title`, `content`, `author_id` (foreign key to `author` table's `id`) and `created_at`
+columns: `id`, `title`, `content`, `author_id` (foreign key to `author` table's `id`)
 
   ![Create foreign key for author_id column to author's id](./assets/author_fk.png)
 
 - Now create a relationship from article table to author table by going to the Relationships tab.
 
-- Clone this repo:
-  ```bash
-  git clone https://github.com/hasura/graphql-engine
-  cd graphql-engine/community/sample-apps/react-static-graphql
-  ```
+
+- Insert sample data into `author` and `article` table:
+
+```
+$ kubectl exec -n yb-demo -it yb-tserver-0 -- ysqlsh -h yb-tserver-0.yb-tservers.yb-demo
+
+```
+Copy the YSQL statements below into the shell and press Enter.
+
+```
+INSERT INTO author(name) VALUES ('John Doe'), ('Jane Doe'); 
+INSERT INTO article(title, content, rating, author_id) 
+VALUES ('Jane''s First Book', 'Lorem ipsum', 10, 2);
+INSERT INTO article(title, content, rating, author_id) 
+VALUES ('John''s First Book', 'dolor sit amet', 8, 1);
+INSERT INTO article(title, content, rating, author_id) 
+VALUES ('Jane''s Second Book', 'consectetur adipiscing elit', 7, 2);
+INSERT INTO article(title, content, rating, author_id) 
+VALUES ('Jane''s Third Book', 'sed do eiusmod tempor', 8, 2);
+INSERT INTO article(title, content, rating, author_id) 
+VALUES ('John''s Second Book', 'incididunt ut labore', 9, 1);
+SELECT * FROM author ORDER BY id;
+SELECT * FROM article ORDER BY id;
+```
+
+  Verify if the row is inserted successfully
+
+  ![Insert data into author table](./assets/browse_rows.jpg)
+
+
 
 - Install npm modules:
   ```bash
-  yarn install
+  npm install
   ```
 
 - Open `src/apollo.js` and configure Hasura's GraphQL Endpoint as follows: 
@@ -81,7 +104,7 @@ columns: `id`, `title`, `content`, `author_id` (foreign key to `author` table's 
 
     const client = new ApolloClient({
       link: new HttpLink({
-        uri: 'https://myapp.herokuapp.com/v1/graphql',
+        uri: 'http://loadbalancer-ip/v1/graphql',
         fetch
       }),
       cache: new InMemoryCache(),
