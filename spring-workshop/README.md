@@ -7,9 +7,9 @@ This repository walks you the steps of building a simple REST API server using S
 * The orders placed by the users are populated in the `orders` table. An order can consist of multiple line items, each of these are inserted in the `orderline` table.
 
 
-# Pre-requiesties
+# Prerequisites
 
-* Docker Desktop Installed on your workstation
+* [Docker Desktop](https://www.docker.com/products/docker-desktop) Installed on your workstation
 * Java 8
 * IDE of your choice
 
