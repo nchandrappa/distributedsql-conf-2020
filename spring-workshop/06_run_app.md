@@ -1,6 +1,6 @@
 # Run the app on your workstation
 
-#### Step 1: Create a local cluster
+#### Step 1: Create a local cluster on Docker
 
 To create a 1-node cluster with a replication factor (RF) of 1, run the command below.
 
@@ -10,7 +10,7 @@ $ docker run -d --name yugabyte  -p7000:7000 -p9000:9000 -p5433:5433 -p9042:9042
  --daemon=false
 ```
 
-Please checkout our [docs](https://docs.yugabyte.com/latest/deploy/) for other kubernetes deployment methods
+Please checkout our [docs](https://docs.yugabyte.com/latest/deploy/) for other deployment methods
 
 #### Step 2: Build the Spring Boot application 
 

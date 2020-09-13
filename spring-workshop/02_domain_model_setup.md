@@ -1,6 +1,6 @@
 # Create JPA Domain models
 
-#### Step 1: Create a new package `com.yugabyte.ybspringworkshop.model` and lets create `User` domain model
+#### Step 1: Create a new package `com.yugabyte.ybspringworkshop.model` and let's create `User` domain model
 
 
 ```
@@ -57,6 +57,6 @@ public class User {
 
 #### Step 2: Similarly create java classes for `Product`, `Order` and `OrderLine` domain models.
 
-* [Review the code for Product.java](./completed-code/completed-code/src/main/java/com/yugabyte/springdemo/model/Product.java)
-* [Review the code for Order.java](/completed-code/completed-code/src/main/java/com/yugabyte/springdemo/model/Order.java)
-* [Review the code for OrderLine.java](/completed-code/completed-code/src/main/java/com/yugabyte/springdemo/model/OrderLine.java)
+* [Review the code for Product.java](./completed-code/src/main/java/com/yugabyte/springdemo/model/Product.java)
+* [Review the code for Order.java](./completed-code/src/main/java/com/yugabyte/springdemo/model/Order.java)
+* [Review the code for OrderLine.java](./completed-code/src/main/java/com/yugabyte/springdemo/model/OrderLine.java)

@@ -1,11 +1,11 @@
 # Spring Boot App using Yugabyte YSQL API
 
-Let's incrementally build our APIs for sample ecommerce using Spring Data JPA and YugabyteDB.
+Let's incrementally build our the Spring Boot app for simulating ecommerce API using Spring Data JPA and YugabyteDB.
 
 
 ## Create a new Spring Boot app
 
-Lets Navigate to https://start.spring.io for create a new spring-boot project and set the following required dependencies for build our app 
+Lets navigate to https://start.spring.io for creating a new spring-boot skeleton project. Select the following required dependencies for building the app
 
 * Spring Web
 * Spring Data JPA
@@ -14,6 +14,3 @@ Lets Navigate to https://start.spring.io for create a new spring-boot project an
 
 
 ![Create a new Spring Boot app](./images/spring-initializer.png)
-
-
-
