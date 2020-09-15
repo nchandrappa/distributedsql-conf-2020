@@ -1,5 +1,5 @@
 {
-  "name": "graphql-workshop",
+  "name": "react-static-example-basic",
   "private": true,
   "scripts": {
     "start": "react-static start",

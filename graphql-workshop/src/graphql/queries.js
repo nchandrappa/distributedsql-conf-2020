@@ -15,7 +15,6 @@ const GET_ARTICLE = gql`
     	id
     	title
     	content
-    	created_at
     }
   }
 `;
